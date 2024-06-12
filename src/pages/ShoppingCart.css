@@ -1,0 +1,75 @@
+/* src/pages/ShoppingCart.css */
+.cart-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff00;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddddddb8;
+}
+
+.cart-image {
+  width: 50px;
+  height: auto;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.cart-table th {
+  background-color: #f4f4f400;
+}
+
+.cart-table td {
+  vertical-align: middle;
+}
+
+.cart-table input {
+  width: 50px;
+  padding: 0.25rem;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.checkout-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.checkout-button:hover {
+  background-color: #0056b3;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c82333;
+}

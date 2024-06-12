@@ -1,0 +1,21 @@
+/* src/pages/Checkout.css */
+.checkout-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #ffffff00;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.checkout-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-container p {
+  font-size: 1.2rem;
+  color: #555555;
+  margin-bottom: 1rem;
+}
