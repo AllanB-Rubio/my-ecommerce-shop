@@ -1,35 +1,90 @@
-/* src/components/NavBar.css */
+/* Ensure the navbar is fixed and covers the full width of the viewport */
 .navbar {
-  background-color: #1f2633ae;
+  background-color: #2424246c;
   color: white;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 93.5%;
+  z-index: 1000;
 }
 
+/* Container for navbar elements, centered and with max width */
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
 }
 
+/* Title styling */
 .navbar-title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
+/* Flex container for navbar links */
 .navbar-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
+  transition: all 0.3s ease;
 }
 
+/* Individual navbar link styling */
 .navbar-link {
   color: white;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s, transform 0.3s;
+  font-size: 1rem;
 }
 
 .navbar-link:hover {
   color: #63b3ed;
+  transform: scale(1.1);
+}
+
+/* Toggle button for smaller screens */
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 728px) {
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    background-color: #24242479;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar-container {
+    padding: 0 0.5rem;
+  }
+
+  .navbar-link {
+    padding: 0.5rem 0;
+    font-size: 1.2rem;
+  }
 }

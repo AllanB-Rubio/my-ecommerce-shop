@@ -1,18 +1,23 @@
-/* src/pages/Home.css */
+/* Container for homepage */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
 }
 
+/* Hero section styling */
 .hero {
   position: relative;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero img {
   width: 100%;
-  height: 24rem;
+  height: auto;
+  max-height: 30rem;
   object-fit: cover;
 }
 
@@ -29,15 +34,16 @@
 }
 
 .hero-text h1 {
-  font-size: 4rem;
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
 .hero-text p {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
+/* Section styling */
 .section {
   margin-bottom: 2rem;
 }
@@ -46,21 +52,25 @@
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  text-align: left;
+  text-align: center;
 }
 
+/* Grid for product cards */
 .product-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
 }
 
+/* Product card styling */
 .product-card {
   border: 1px solid #e2e8f0;
   padding: 1rem;
   transition: box-shadow 0.3s;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .product-card:hover {
@@ -84,14 +94,31 @@
   color: #4a5568;
 }
 
+/* Responsive adjustments for product grid */
 @media (min-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+
+  .hero-text p {
+    font-size: 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-text h1 {
+    font-size: 4rem;
+  }
+
+  .hero-text p {
+    font-size: 1.75rem;
   }
 }
