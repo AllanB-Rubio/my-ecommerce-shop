@@ -43,20 +43,23 @@ export const updateAdminUser = async (req, res) => {
   const { id } = req.params;
   const { username, password, firstName, lastName, permissions } = req.body;
   const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
-  const SQL = `
+
+  let SQL = `
     UPDATE admin_user
-    SET username = $2, password = $3, first_name = $4, last_name = $5, permissions = $6, modified_at = NOW()
+    SET username = $2, first_name = $3, last_name = $4, permissions = $5, modified_at = NOW()
+  `;
+  const values = [id, username, firstName, lastName, permissions];
+
+  if (hashedPassword) {
+    SQL += `, password = $6`;
+    values.push(hashedPassword);
+  }
+
+  SQL += `
     WHERE id = $1 AND deleted_at IS NULL
     RETURNING *;
   `;
-  const values = [
-    id,
-    username,
-    hashedPassword,
-    firstName,
-    lastName,
-    permissions,
-  ];
+
   try {
     const result = await client.query(SQL, values);
     res.status(200).json(result.rows[0]);
@@ -75,5 +78,17 @@ export const deleteAdminUser = async (req, res) => {
     res.status(200).json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ error: "Failed to delete admin user" });
+  }
+};
+
+// Get Admin User by Username
+export const getAdminUserByUsername = async (username) => {
+  const SQL =
+    "SELECT * FROM admin_user WHERE username = $1 AND deleted_at IS NULL;";
+  try {
+    const result = await client.query(SQL, [username]);
+    return result.rows[0];
+  } catch (error) {
+    throw new Error("Failed to fetch admin user");
   }
 };
