@@ -1,9 +1,21 @@
-# React + Vite
+# E-Commerce Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is an e-commerce project built with React, Node.js, Express, and PostgreSQL. The project includes features for user authentication, product management, shopping cart functionality, and an admin dashboard for managing products and orders.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# my-ecommerce-shop
+## Features
+
+- User registration and login
+- Product listing and details view
+- Shopping cart functionality
+- Order checkout
+- Admin dashboard for managing products and orders
+
+## Tech Stack
+
+- Frontend: React, React Router
+- Backend: Node.js, Express
+- Database: PostgreSQL
+- Authentication: JSON Web Token (JWT)
+- Styling: CSS
