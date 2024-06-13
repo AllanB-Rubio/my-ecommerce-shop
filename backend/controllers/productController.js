@@ -40,15 +40,16 @@ export const getProductById = async (req, res) => {
   const SQL = "SELECT * FROM products WHERE id = $1 AND deleted_at IS NULL;";
   try {
     const result = await client.query(SQL, [id]);
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: "Product not found" });
+    if (result.rows.length > 0) {
+      res.status(200).json(result.rows[0]);
+    } else {
+      res.status(404).json({ error: "Product not found" });
     }
-    res.status(200).json(result.rows[0]);
   } catch (error) {
-    console.error("Error fetching product by ID:", error);
     res.status(500).json({ error: "Failed to fetch product" });
   }
 };
+
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
   const { name, description, SKU, price, inventoryId, categoryId } = req.body;

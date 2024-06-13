@@ -154,7 +154,13 @@ const createTables = async () => {
     VALUES
       ('Stylish Shirt', 'A very stylish shirt.', 'SHIRT001', 29.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/shirt.jpg'),
       ('Casual T-Shirt', 'A very casual t-shirt.', 'TSHIRT001', 19.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/shirt.jpg'),
-      ('Formal Shirt', 'A very formal shirt.', 'F_SHIRT001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/shirt.jpg');
+      ('Formal Shirt', 'A very formal shirt.', 'F_SHIRT001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/shirt.jpg'),
+      ('Best Seller Shirt', 'A very popular shirt.', 'BSS001', 34.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/best-sellers.jpg'),
+      ('Top Rated T-Shirt', 'A top-rated t-shirt.', 'TRT001', 24.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/best-sellers.jpg'),
+      ('Famous Formal Shirt', 'A famous formal shirt.', 'FFS001', 44.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/best-sellers.jpg'),
+      ('New Arrival Shirt', 'A stylish new arrival shirt.', 'NAS001', 29.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/new-arrival.jpg'),
+      ('Latest T-Shirt', 'The latest in fashion t-shirts.', 'LT001', 19.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/new-arrival.jpg'),
+      ('Brand New Formal Shirt', 'A brand new formal shirt.', 'BNFS001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/new-arrival.jpg');
   `;
   await client.query(insertProducts);
 };

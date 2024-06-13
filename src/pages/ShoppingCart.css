@@ -44,6 +44,20 @@
   text-align: center;
 }
 
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddddddb8;
+}
+
+.total-amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .checkout-button {
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
@@ -53,7 +67,6 @@
   border-radius: 4px;
   cursor: pointer;
   display: block;
-  margin: 0 auto;
 }
 
 .checkout-button:hover {

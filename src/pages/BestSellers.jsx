@@ -56,7 +56,7 @@ const BestSellers = () => {
             {/* <img src={product.image} alt={product.name} /> */}
             <img
               src="https://via.placeholder.com/300"
-              alt="Placeholder Image"
+              alt="Placeholder Image" // temporary
             />
 
             <h3>{product.name}</h3>

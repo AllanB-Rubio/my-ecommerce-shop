@@ -6,7 +6,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
-  width: 93.5%;
+  width: 100%;
   z-index: 1000;
 }
 
@@ -18,13 +18,20 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-  width: 100%;
+  width: 87%;
 }
 
-/* Title styling */
-.navbar-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+/* Logo container styling */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo image styling with CSS transformation */
+.navbar-image {
+  height: 40px; /* Adjust the height as needed */
+  width: auto;
+  transform: scale(1.2); /* Example transformation */
 }
 
 /* Flex container for navbar links */

@@ -1,13 +1,14 @@
-// src/pages/ProductDetails.jsx
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [message, setMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -31,9 +32,14 @@ const ProductDetails = () => {
     const updatedCart = [...storedCart, { ...product, quantity: 1 }];
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setMessage("Product added to cart!");
+    setShowMessage(true);
     setTimeout(() => {
-      setMessage("");
-    }, 3000);
+      setShowMessage(false);
+    }, 5000);
+  };
+
+  const handleViewCart = () => {
+    navigate("/cart");
   };
 
   if (error) {
@@ -46,7 +52,15 @@ const ProductDetails = () => {
 
   return (
     <div className="product-details-container">
-      {message && <p className="message">{message}</p>}
+      {showMessage && (
+        <div className="message">
+          <p>{message}</p>
+          <button onClick={handleViewCart}>View Cart</button>
+          <button onClick={() => setShowMessage(false)}>
+            Continue Shopping
+          </button>
+        </div>
+      )}
       <img
         src={product.image}
         alt={product.name}

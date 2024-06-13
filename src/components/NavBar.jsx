@@ -1,3 +1,4 @@
+// src/components/NavBar.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
@@ -12,7 +13,15 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="navbar-title">My Store</div>
+        <div className="navbar-logo">
+          <Link to="/">
+            <img
+              src="/images/relentless.pursuit.svg"
+              alt="Relentless Pursuit"
+              className="navbar-image"
+            />
+          </Link>
+        </div>
         <div className={`navbar-links ${isOpen ? "open" : ""}`}>
           <Link to="/" className="navbar-link" onClick={() => setIsOpen(false)}>
             Home
