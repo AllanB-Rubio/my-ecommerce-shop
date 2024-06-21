@@ -29,9 +29,9 @@
 
 /* Logo image styling with CSS transformation */
 .navbar-image {
-  height: 40px; /* Adjust the height as needed */
+  height: 40px;
   width: auto;
-  transform: scale(1.2); /* Example transformation */
+  transform: scale(1.2);
 }
 
 /* Flex container for navbar links */
@@ -50,7 +50,7 @@
 }
 
 .navbar-link:hover {
-  color: #63b3ed;
+  color: #5f94c3;
   transform: scale(1.1);
 }
 
@@ -80,6 +80,7 @@
 
   .navbar-links.open {
     display: flex;
+    background-color: #242424;
   }
 
   .navbar-toggle {

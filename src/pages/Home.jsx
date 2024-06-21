@@ -9,47 +9,47 @@ const Home = () => {
     {
       id: 1,
       name: "Stylish Shirt",
-      price: 29.99,
+      price: 19.99,
       description: "A very stylish shirt.",
-      image: "/images/shirt.jpg",
+      image: "/images/white-shirt-gradient.png",
     },
     {
       id: 2,
       name: "Casual T-Shirt",
       price: 19.99,
       description: "A very casual t-shirt.",
-      image: "/images/shirt.jpg",
+      image: "/images/dual.display-shirts.png",
     },
     {
       id: 3,
-      name: "Formal Shirt",
+      name: "Comfy Sweater",
       price: 39.99,
-      description: "A very formal shirt.",
-      image: "/images/shirt.jpg",
+      description: "A very comfy sweater.",
+      image: "/images/sweatshirt-mockup.png",
     },
   ];
 
   const bestSellers = [
     {
       id: 4,
-      name: "Best Seller Shirt",
+      name: "Dual Tone Hoodie",
       price: 34.99,
-      description: "A very popular shirt.",
-      image: "/images/best-sellers.jpg",
+      description: "A very popular hoodie.",
+      image: "/images/dual-tone-hoodie.jpeg",
     },
     {
       id: 5,
       name: "Top Rated T-Shirt",
       price: 24.99,
       description: "A top-rated t-shirt.",
-      image: "/images/best-sellers.jpg",
+      image: "/images/shirt-woman.png",
     },
     {
       id: 6,
-      name: "Famous Formal Shirt",
+      name: "Grayscale Edition Shirt",
       price: 44.99,
-      description: "A famous formal shirt.",
-      image: "/images/best-sellers.jpg",
+      description: "Oversized grayscale edition t-shirt.",
+      image: "/images/white-tshirt.png",
     },
   ];
 
@@ -85,6 +85,19 @@ const Home = () => {
     <div className="container">
       <section className="hero">
         <img src="/images/hero.jpg" alt="Hero" />
+      </section>
+      <section className="mission-statement">
+        <h2>Our Mission</h2>
+        <p>
+          At Relentless Pursuit, our mission is to inspire and empower
+          individuals to strive for their personal best in every facet of their
+          lives. We are committed to providing high-quality, innovative athletic
+          and lifestyle products that support and enhance the journey of
+          relentless determination and unwavering dedication. Our brand stands
+          for strength, resilience, and the relentless pursuit of excellence,
+          encouraging our community to push boundaries, overcome challenges, and
+          achieve their goals with passion and perseverance.
+        </p>
       </section>
       <section className="section">
         <h2>Featured Products</h2>

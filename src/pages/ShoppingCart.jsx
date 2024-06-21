@@ -1,6 +1,7 @@
 // src/pages/ShoppingCart.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./ShoppingCart.css";
 
 const ShoppingCart = () => {
@@ -27,11 +28,12 @@ const ShoppingCart = () => {
   };
 
   const handleCheckout = () => {
-    // Mock checkout process
-    const orderNumber = `ORD-${Math.floor(Math.random() * 1000000)}`;
-    setCart([]);
-    localStorage.removeItem("cart");
-    navigate(`/checkout/${orderNumber}`);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/checkout-options");
+    } else {
+      navigate("/shipping-billing");
+    }
   };
 
   const calculateTotal = () => {

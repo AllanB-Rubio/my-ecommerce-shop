@@ -35,6 +35,11 @@
   height: 16rem;
   object-fit: cover;
   margin-bottom: 1rem;
+  transition: transform 0.3s ease; /*  hover effect */
+}
+
+.best-seller-card img:hover {
+  transform: scale(1.05); /* Scale image on hover */
 }
 
 .best-seller-card h3 {

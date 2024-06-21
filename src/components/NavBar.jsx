@@ -16,7 +16,7 @@ const NavBar = () => {
         <div className="navbar-logo">
           <Link to="/">
             <img
-              src="/images/relentless.pursuit.svg"
+              src="/images/all-white.logo.rp.png"
               alt="Relentless Pursuit"
               className="navbar-image"
             />
@@ -32,20 +32,6 @@ const NavBar = () => {
             onClick={() => setIsOpen(false)}
           >
             Best Sellers
-          </Link>
-          <Link
-            to="/mens"
-            className="navbar-link"
-            onClick={() => setIsOpen(false)}
-          >
-            Men's
-          </Link>
-          <Link
-            to="/womens"
-            className="navbar-link"
-            onClick={() => setIsOpen(false)}
-          >
-            Women's
           </Link>
           <Link
             to="/contact"

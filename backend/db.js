@@ -13,20 +13,18 @@ const client = new Client({
 
 const createTables = async () => {
   const SQL = `
-    DROP TABLE IF EXISTS cartItems;
-    DROP TABLE IF EXISTS reviews;
-    DROP TABLE IF EXISTS orderItems;
-    DROP TABLE IF EXISTS orders;
-
-    DROP TABLE IF EXISTS products;
-    DROP TABLE IF EXISTS product_inventories;
-    DROP TABLE IF EXISTS product_categories;
-
-    DROP TABLE IF EXISTS user_payments;
-    DROP TABLE IF EXISTS user_addresses;
-
-    DROP TABLE IF EXISTS admin_user;
-    DROP TABLE IF EXISTS "user";
+    DROP TABLE IF EXISTS cartItems CASCADE;
+    DROP TABLE IF EXISTS reviews CASCADE;
+    DROP TABLE IF EXISTS orderItems CASCADE;
+    DROP TABLE IF EXISTS orders CASCADE;
+    DROP TABLE IF EXISTS products CASCADE;
+    DROP TABLE IF EXISTS product_inventories CASCADE;
+    DROP TABLE IF EXISTS product_categories CASCADE;
+    DROP TABLE IF EXISTS payments CASCADE;
+    DROP TABLE IF EXISTS shipping_addresses CASCADE;
+    DROP TABLE IF EXISTS billing_addresses CASCADE;
+    DROP TABLE IF EXISTS admin_user CASCADE;
+    DROP TABLE IF EXISTS "user" CASCADE;
 
     CREATE TABLE "user" (
         id UUID PRIMARY KEY,
@@ -123,6 +121,36 @@ const createTables = async () => {
         modified_at TIMESTAMP DEFAULT NOW(),
         deleted_at TIMESTAMP
     );
+
+    CREATE TABLE shipping_addresses (
+        id UUID PRIMARY KEY,
+        user_id UUID REFERENCES "user"(id) ON DELETE CASCADE,
+        address_line1 VARCHAR(255) NOT NULL,
+        address_line2 VARCHAR(255),
+        city VARCHAR(100) NOT NULL,
+        state VARCHAR(100) NOT NULL,
+        postal_code VARCHAR(20) NOT NULL,
+        country VARCHAR(100) NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW(),
+        modified_at TIMESTAMP DEFAULT NOW(),
+        deleted_at TIMESTAMP,
+        UNIQUE (user_id)
+    );
+
+    CREATE TABLE billing_addresses (
+        id UUID PRIMARY KEY,
+        user_id UUID REFERENCES "user"(id) ON DELETE CASCADE,
+        address_line1 VARCHAR(255) NOT NULL,
+        address_line2 VARCHAR(255),
+        city VARCHAR(100) NOT NULL,
+        state VARCHAR(100) NOT NULL,
+        postal_code VARCHAR(20) NOT NULL,
+        country VARCHAR(100) NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW(),
+        modified_at TIMESTAMP DEFAULT NOW(),
+        deleted_at TIMESTAMP,
+        UNIQUE (user_id)
+    );
   `;
 
   await client.query(SQL);
@@ -148,16 +176,16 @@ const createTables = async () => {
     `INSERT INTO product_inventories (quantity) VALUES (150) RETURNING id;`
   );
 
-  // Insert initial products
+  // Insert products
   const insertProducts = `
     INSERT INTO products (name, description, SKU, price, inventory_id, category_id, image)
     VALUES
-      ('Stylish Shirt', 'A very stylish shirt.', 'SHIRT001', 29.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/shirt.jpg'),
-      ('Casual T-Shirt', 'A very casual t-shirt.', 'TSHIRT001', 19.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/shirt.jpg'),
-      ('Formal Shirt', 'A very formal shirt.', 'F_SHIRT001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/shirt.jpg'),
-      ('Best Seller Shirt', 'A very popular shirt.', 'BSS001', 34.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/best-sellers.jpg'),
-      ('Top Rated T-Shirt', 'A top-rated t-shirt.', 'TRT001', 24.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/best-sellers.jpg'),
-      ('Famous Formal Shirt', 'A famous formal shirt.', 'FFS001', 44.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/best-sellers.jpg'),
+      ('Stylish Shirt', 'A very stylish shirt.', 'SHIRT001', 19.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/white-shirt-gradient.png'),
+      ('Casual T-Shirt', 'A very casual t-shirt.', 'TSHIRT001', 19.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/dual.display-shirts.png'),
+      ('Comfy Sweater', 'A very compfy sweater.', 'F_SHIRT001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/sweatshirt-mockup.png'),
+      ('Dual Tone Hoodie', 'Zip-Up soft hoodie.', 'BSS001', 34.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/black-white-hoodie.png'),
+      ('Top Rated T-Shirt', 'A top-rated t-shirt.', 'TRT001', 24.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/shirt-woman.png'),
+      ('Famous Formal Shirt', 'Grayscale Edition Shirt.', 'FFS001', 44.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/white-tshirt.png'),
       ('New Arrival Shirt', 'A stylish new arrival shirt.', 'NAS001', 29.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/new-arrival.jpg'),
       ('Latest T-Shirt', 'The latest in fashion t-shirts.', 'LT001', 19.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/new-arrival.jpg'),
       ('Brand New Formal Shirt', 'A brand new formal shirt.', 'BNFS001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/new-arrival.jpg');
@@ -165,7 +193,6 @@ const createTables = async () => {
   await client.query(insertProducts);
 };
 
-// User Functions
 const createUser = async (
   username,
   email,

@@ -6,15 +6,20 @@ import {
   updateOrder,
   deleteOrder,
   getOrdersByUserId,
+  createGuestOrder,
 } from "../controllers/orderController.js";
+
 import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/", authenticateToken, createOrder);
+router.post("/guest", createGuestOrder);
+
 router.get("/", authenticateToken, getOrders);
 router.get("/:id", authenticateToken, getOrderById);
 router.get("/user/orders", authenticateToken, getOrdersByUserId);
+
 router.put("/:id", authenticateToken, updateOrder);
 router.delete("/:id", authenticateToken, deleteOrder);
 

@@ -21,26 +21,24 @@
   object-fit: cover;
 }
 
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
+/* Mission statement section styling */
+.mission-statement {
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
+  background: #f8f8f800;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
 }
 
-.hero-text h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
+.mission-statement h2 {
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
-.hero-text p {
+.mission-statement p {
   font-size: 1.25rem;
+  color: #727272;
+  line-height: 1.5;
 }
 
 /* Section styling */
@@ -82,6 +80,11 @@
   height: 16rem;
   object-fit: cover;
   margin-bottom: 1rem;
+  transition: transform 0.3s ease; /*  hover effect */
+}
+
+.product-card img:hover {
+  transform: scale(1.05); /* Scale image on hover */
 }
 
 .product-card h3 {
