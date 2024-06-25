@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+// src/pages/ShippingBilling.jsx
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./ShippingBilling.css";
 
 const ShippingBilling = () => {
@@ -22,6 +23,15 @@ const ShippingBilling = () => {
   });
   const [sameAsShipping, setSameAsShipping] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isGuest, setIsGuest] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("guest") === "true") {
+      setIsGuest(true);
+    }
+  }, [location.search]);
 
   const handleInputChange = (e, setFunction) => {
     const { name, value } = e.target;
@@ -38,39 +48,38 @@ const ShippingBilling = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      const addressResponse = await axios.post(
-        "http://localhost:3000/api/addresses",
-        { shipping, billing: sameAsShipping ? shipping : billing },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const totalAmount = cart.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
       const orderData = {
-        items: cart,
-        totalAmount,
+        items: JSON.parse(localStorage.getItem("cart")) || [],
+        totalAmount: JSON.parse(localStorage.getItem("cart")).reduce(
+          (total, item) => total + item.price * item.quantity,
+          0
+        ),
+        shipping,
+        billing: sameAsShipping ? shipping : billing,
       };
 
-      const orderResponse = await axios.post(
-        "http://localhost:3000/api/orders",
-        orderData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      if (isGuest) {
+        // Remove any headers for guest checkout
+        const response = await axios.post(
+          "http://localhost:3000/api/orders/guest",
+          orderData
+        );
+        navigate(`/order-confirmation/${response.data.id}`);
+      } else {
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+          "http://localhost:3000/api/orders",
+          orderData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        navigate(`/order-confirmation/${response.data.id}`);
+      }
 
       localStorage.removeItem("cart"); // Clear the cart after placing the order
-      navigate(`/order-confirmation/${orderResponse.data.id}`);
     } catch (error) {
       console.error("Failed to save addresses or create order", error);
     }

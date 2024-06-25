@@ -7,7 +7,7 @@ const CheckoutOptions = () => {
   const navigate = useNavigate();
 
   const handleGuestCheckout = () => {
-    navigate("/checkout?guest=true");
+    navigate("/shipping-billing?guest=true");
   };
 
   return (
@@ -15,8 +15,8 @@ const CheckoutOptions = () => {
       <h1>Checkout Options</h1>
       <p>Please choose an option to proceed with your checkout:</p>
       <div className="checkout-buttons">
-        <button onClick={() => navigate("/login")}>Login</button>
-        <button onClick={() => navigate("/register")}>Register</button>
+        <button onClick={() => navigate("/account")}>Login</button>
+        <button onClick={() => navigate("/account")}>Register</button>
         <button onClick={handleGuestCheckout}>Checkout as Guest</button>
       </div>
     </div>

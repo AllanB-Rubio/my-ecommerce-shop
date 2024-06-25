@@ -42,17 +42,17 @@ export const createOrder = async (req, res) => {
 
 // Create Guest Order
 export const createGuestOrder = async (req, res) => {
-  const { items, totalAmount } = req.body;
+  const { items, totalAmount, shipping, billing } = req.body;
   const orderId = uuidv4();
   const orderStatus = "Pending";
 
   try {
     const orderQuery = `
-      INSERT INTO orders (id, total_amount, status)
-      VALUES ($1, $2, $3)
+      INSERT INTO orders (id, total_amount, status, is_guest)
+      VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
-    const orderValues = [orderId, totalAmount, orderStatus];
+    const orderValues = [orderId, totalAmount, orderStatus, true];
     const orderResult = await client.query(orderQuery, orderValues);
 
     const orderItemsQuery = `
@@ -70,6 +70,21 @@ export const createGuestOrder = async (req, res) => {
       ];
       await client.query(orderItemsQuery, orderItemValues);
     }
+
+    const addressId = uuidv4();
+    await client.query(
+      `INSERT INTO addresses (id, address_line1, address_line2, city, state, postal_code, country)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      [
+        addressId,
+        shipping.addressLine1,
+        shipping.addressLine2,
+        shipping.city,
+        shipping.state,
+        shipping.postalCode,
+        shipping.country,
+      ]
+    );
 
     res.status(201).json(orderResult.rows[0]);
   } catch (error) {

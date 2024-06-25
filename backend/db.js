@@ -21,8 +21,7 @@ const createTables = async () => {
     DROP TABLE IF EXISTS product_inventories CASCADE;
     DROP TABLE IF EXISTS product_categories CASCADE;
     DROP TABLE IF EXISTS payments CASCADE;
-    DROP TABLE IF EXISTS shipping_addresses CASCADE;
-    DROP TABLE IF EXISTS billing_addresses CASCADE;
+    DROP TABLE IF EXISTS addresses CASCADE;
     DROP TABLE IF EXISTS admin_user CASCADE;
     DROP TABLE IF EXISTS "user" CASCADE;
 
@@ -88,7 +87,8 @@ const createTables = async () => {
         status VARCHAR(50),
         created_at TIMESTAMP DEFAULT NOW(),
         modified_at TIMESTAMP DEFAULT NOW(),
-        deleted_at TIMESTAMP
+        deleted_at TIMESTAMP,
+        is_guest BOOLEAN DEFAULT FALSE
     );
 
     CREATE TABLE orderItems (
@@ -122,22 +122,7 @@ const createTables = async () => {
         deleted_at TIMESTAMP
     );
 
-    CREATE TABLE shipping_addresses (
-        id UUID PRIMARY KEY,
-        user_id UUID REFERENCES "user"(id) ON DELETE CASCADE,
-        address_line1 VARCHAR(255) NOT NULL,
-        address_line2 VARCHAR(255),
-        city VARCHAR(100) NOT NULL,
-        state VARCHAR(100) NOT NULL,
-        postal_code VARCHAR(20) NOT NULL,
-        country VARCHAR(100) NOT NULL,
-        created_at TIMESTAMP DEFAULT NOW(),
-        modified_at TIMESTAMP DEFAULT NOW(),
-        deleted_at TIMESTAMP,
-        UNIQUE (user_id)
-    );
-
-    CREATE TABLE billing_addresses (
+    CREATE TABLE addresses (
         id UUID PRIMARY KEY,
         user_id UUID REFERENCES "user"(id) ON DELETE CASCADE,
         address_line1 VARCHAR(255) NOT NULL,

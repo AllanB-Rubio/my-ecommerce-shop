@@ -5,23 +5,17 @@ import NavBar from "./components/NavBar";
 
 import Home from "./pages/Home";
 import BestSellers from "./pages/BestSellers";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-
+import Account from "./pages/Account";
 import ProductList from "./pages/ProductList";
 import ProductDetails from "./pages/ProductDetails";
 import ShoppingCart from "./pages/ShoppingCart";
-
-import Account from "./pages/Account";
 import Checkout from "./pages/Checkout";
 import CheckoutOptions from "./pages/CheckoutOptions";
 import ShippingBilling from "./pages/ShippingBilling";
 import OrderConfirmation from "./pages/OrderConfirmation";
-
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 import Footer from "./components/Footer";
-
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 
@@ -37,8 +31,6 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="best-sellers" element={<BestSellers />} />
           <Route path="account" element={<Account />} />
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
           <Route path="products" element={<ProductList />} />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="contact" element={<Contact />} />

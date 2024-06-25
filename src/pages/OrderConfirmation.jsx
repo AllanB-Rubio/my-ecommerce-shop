@@ -12,12 +12,11 @@ const OrderConfirmation = () => {
     const fetchOrder = async () => {
       try {
         const token = localStorage.getItem("token");
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await axios.get(
           `http://localhost:3000/api/orders/${orderId}`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers,
           }
         );
         setOrder(response.data);

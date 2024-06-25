@@ -1,11 +1,16 @@
+// src/pages/Account.jsx
 import React, { useState, useEffect, useContext } from "react";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import "./Account.css";
 
 const Account = () => {
-  const { user, login, register, logout } = useContext(AuthContext);
-  const [isLogin, setIsLogin] = useState(true);
+  const { user, login, register } = useContext(AuthContext);
+  const [searchParams] = useSearchParams();
+  const [isLogin, setIsLogin] = useState(
+    searchParams.get("isLogin") === "true"
+  );
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -69,22 +74,6 @@ const Account = () => {
       setError("Registration failed. Please try again.");
       console.error("Registration failed", error.response || error);
     }
-  };
-
-  const handleLogout = () => {
-    logout(() => {
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        phoneNumber: "",
-      });
-      setSuccess("");
-      setError("");
-      setLogoutSuccess("Logged out successfully!");
-    });
   };
 
   if (user) {

@@ -28,7 +28,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/admin/users", authenticateToken, adminRoutes);
 app.use("/api/users", authenticateToken, userRoutes);
-app.use("/api/orders", authenticateToken, orderRoutes);
+app.use("/api/orders", orderRoutes); // Note: No authentication for guest checkout
 app.use("/api/reviews", authenticateToken, reviewRoutes);
 app.use("/api/addresses", authenticateToken, addressRoutes);
 app.use("/api/payments", authenticateToken, paymentRoutes);
