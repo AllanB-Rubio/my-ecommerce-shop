@@ -1,10 +1,12 @@
 // src/components/NavBar.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import "./Navbar.css";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -54,6 +56,11 @@ const NavBar = () => {
           >
             Cart
           </Link>
+          {user && (
+            <button className="navbar-link" onClick={logout}>
+              Logout
+            </button>
+          )}
         </div>
         <button className="navbar-toggle" onClick={toggleMenu}>
           ☰

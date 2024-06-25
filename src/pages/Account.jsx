@@ -1,10 +1,10 @@
-// src/pages/Account.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 import "./Account.css";
 
 const Account = () => {
-  const [user, setUser] = useState(null);
+  const { user, login, register, logout } = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: "",
@@ -17,42 +17,27 @@ const Account = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [orders, setOrders] = useState([]);
+  const [logoutSuccess, setLogoutSuccess] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("http://localhost:3000/api/auth/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setUser(response.data);
-          fetchOrders();
-        })
-        .catch((error) => {
-          console.error("Failed to fetch user", error);
-        });
+    if (user) {
+      fetchOrders();
     }
-  }, []);
+  }, [user]);
 
   const fetchOrders = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/orders/user/orders",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setOrders(response.data);
-      } catch (error) {
-        console.error("Failed to fetch orders", error);
-      }
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/orders/user/orders",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setOrders(response.data);
+    } catch (error) {
+      console.error("Failed to fetch orders", error);
     }
   };
 
@@ -63,18 +48,10 @@ const Account = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        {
-          email: formData.email,
-          password: formData.password,
-        }
-      );
-      localStorage.setItem("token", response.data.token);
-      setUser(response.data.user);
+      await login(formData.email, formData.password);
       setSuccess("Login successful!");
       setError("");
-      fetchOrders();
+      setLogoutSuccess(""); // Clear logout success message on login
     } catch (error) {
       setError("Login failed. Please check your credentials.");
       console.error("Login failed", error.response || error);
@@ -84,7 +61,7 @@ const Account = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/auth/register", formData);
+      await register(formData);
       setIsLogin(true);
       setSuccess("Account created successfully!");
       setError("");
@@ -95,10 +72,19 @@ const Account = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    setOrders([]);
-    setSuccess("Logged out successfully!");
+    logout(() => {
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
+      });
+      setSuccess("");
+      setError("");
+      setLogoutSuccess("Logged out successfully!");
+    });
   };
 
   if (user) {
@@ -107,10 +93,7 @@ const Account = () => {
         <h1>Account</h1>
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
-        <button onClick={handleLogout}>Logout</button>
-
         {success && <p className="success-message">{success}</p>}
-
         <h2>Recent Orders</h2>
         {orders.length > 0 ? (
           <table className="order-table">
@@ -150,6 +133,7 @@ const Account = () => {
 
   return (
     <div className="auth-container">
+      {logoutSuccess && <p className="success-message">{logoutSuccess}</p>}
       {isLogin ? (
         <form onSubmit={handleLogin} className="auth-form">
           <h2>Login</h2>

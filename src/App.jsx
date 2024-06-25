@@ -36,17 +36,13 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="best-sellers" element={<BestSellers />} />
-
           <Route path="account" element={<Account />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-
           <Route path="products" element={<ProductList />} />
           <Route path="products/:id" element={<ProductDetails />} />
-
           <Route path="contact" element={<Contact />} />
           <Route path="thank-you" element={<ThankYou />} />
-
           <Route path="cart" element={<ShoppingCart />} />
           <Route path="checkout-options" element={<CheckoutOptions />} />
           <Route path="checkout" element={<Checkout />} />
@@ -55,7 +51,6 @@ function App() {
             path="order-confirmation/:orderId"
             element={<OrderConfirmation />}
           />
-
           <Route path="admin/login" element={<AdminLogin />} />
           <Route path="admin/dashboard" element={<AdminDashboard />} />
         </Routes>

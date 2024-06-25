@@ -1,4 +1,3 @@
-// src/pages/ShippingBilling.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -40,13 +39,9 @@ const ShippingBilling = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const shippingData = {
-        shipping,
-        billing: sameAsShipping ? shipping : billing,
-      };
       const addressResponse = await axios.post(
         "http://localhost:3000/api/addresses",
-        shippingData,
+        { shipping, billing: sameAsShipping ? shipping : billing },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -55,12 +50,13 @@ const ShippingBilling = () => {
       );
 
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalAmount = cart.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
       const orderData = {
         items: cart,
-        totalAmount: cart.reduce(
-          (total, item) => total + item.price * item.quantity,
-          0
-        ),
+        totalAmount,
       };
 
       const orderResponse = await axios.post(
@@ -73,6 +69,7 @@ const ShippingBilling = () => {
         }
       );
 
+      localStorage.removeItem("cart"); // Clear the cart after placing the order
       navigate(`/order-confirmation/${orderResponse.data.id}`);
     } catch (error) {
       console.error("Failed to save addresses or create order", error);
