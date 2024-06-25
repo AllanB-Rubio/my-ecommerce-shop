@@ -71,12 +71,13 @@ export const createGuestOrder = async (req, res) => {
       await client.query(orderItemsQuery, orderItemValues);
     }
 
-    const addressId = uuidv4();
+    const shippingId = uuidv4();
     await client.query(
-      `INSERT INTO addresses (id, address_line1, address_line2, city, state, postal_code, country)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      `INSERT INTO addresses (id, order_id, type, address_line1, address_line2, city, state, postal_code, country)
+       VALUES ($1, $2, 'shipping', $3, $4, $5, $6, $7, $8)`,
       [
-        addressId,
+        shippingId,
+        orderId,
         shipping.addressLine1,
         shipping.addressLine2,
         shipping.city,
@@ -85,6 +86,24 @@ export const createGuestOrder = async (req, res) => {
         shipping.country,
       ]
     );
+
+    if (billing) {
+      const billingId = uuidv4();
+      await client.query(
+        `INSERT INTO addresses (id, order_id, type, address_line1, address_line2, city, state, postal_code, country)
+         VALUES ($1, $2, 'billing', $3, $4, $5, $6, $7, $8)`,
+        [
+          billingId,
+          orderId,
+          billing.addressLine1,
+          billing.addressLine2,
+          billing.city,
+          billing.state,
+          billing.postalCode,
+          billing.country,
+        ]
+      );
+    }
 
     res.status(201).json(orderResult.rows[0]);
   } catch (error) {
@@ -125,6 +144,30 @@ export const getOrderById = async (req, res) => {
   } catch (error) {
     console.error("Failed to fetch order:", error);
     res.status(500).json({ error: "Failed to fetch order" });
+  }
+};
+
+// Get Guest Order By ID
+export const getGuestOrderById = async (req, res) => {
+  const { id } = req.params;
+  const SQL = `
+    SELECT o.id, o.total_amount, o.status, o.created_at,
+           json_agg(json_build_object('id', oi.id, 'name', p.name, 'quantity', oi.quantity, 'price', oi.price, 'image', p.image)) as items
+    FROM orders o
+    JOIN orderItems oi ON o.id = oi.order_id
+    JOIN products p ON oi.product_id = p.id
+    WHERE o.id = $1 AND o.is_guest = true
+    GROUP BY o.id;
+  `;
+  try {
+    const result = await client.query(SQL, [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error("Failed to fetch guest order:", error);
+    res.status(500).json({ error: "Failed to fetch guest order" });
   }
 };
 

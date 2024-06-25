@@ -12,17 +12,37 @@
 
 .order-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.order-item-image {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
+.order-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 .order-item-details {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .order-item {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .order-item img {
+    max-width: 200px;
+    margin-right: 20px;
+  }
+
+  .order-item-details {
+    align-items: flex-start;
+  }
 }

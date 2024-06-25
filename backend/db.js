@@ -85,10 +85,10 @@ const createTables = async () => {
         user_id UUID REFERENCES "user"(id) ON DELETE CASCADE,
         total_amount NUMERIC(10, 2) NOT NULL,
         status VARCHAR(50),
+        is_guest BOOLEAN DEFAULT false,
         created_at TIMESTAMP DEFAULT NOW(),
         modified_at TIMESTAMP DEFAULT NOW(),
-        deleted_at TIMESTAMP,
-        is_guest BOOLEAN DEFAULT FALSE
+        deleted_at TIMESTAMP
     );
 
     CREATE TABLE orderItems (
@@ -124,7 +124,8 @@ const createTables = async () => {
 
     CREATE TABLE addresses (
         id UUID PRIMARY KEY,
-        user_id UUID REFERENCES "user"(id) ON DELETE CASCADE,
+        order_id UUID REFERENCES orders(id) ON DELETE CASCADE,
+        type VARCHAR(50) NOT NULL,
         address_line1 VARCHAR(255) NOT NULL,
         address_line2 VARCHAR(255),
         city VARCHAR(100) NOT NULL,
@@ -133,8 +134,7 @@ const createTables = async () => {
         country VARCHAR(100) NOT NULL,
         created_at TIMESTAMP DEFAULT NOW(),
         modified_at TIMESTAMP DEFAULT NOW(),
-        deleted_at TIMESTAMP,
-        UNIQUE (user_id)
+        deleted_at TIMESTAMP
     );
   `;
 

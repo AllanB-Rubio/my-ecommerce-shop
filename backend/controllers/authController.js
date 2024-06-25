@@ -1,7 +1,8 @@
+// backend/controllers/authController.js
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
-import { client } from "../db.js";
+import { client, getUserById } from "../db.js"; // Ensure getUserById is correctly imported from db.js
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -67,15 +68,16 @@ export const loginUser = async (req, res) => {
 
 // Get User Profile
 export const getUserProfile = async (req, res) => {
-  const userId = req.user.id; // Assumes user ID is attached to the request by the authentication middleware
+  const userId = req.user.id;
 
   try {
-    const user = await getUserById(userId); // Fetch user details from the database
+    const user = await getUserById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {
+    console.error("Failed to fetch user profile:", error);
     res.status(500).json({ error: "Failed to fetch user profile" });
   }
 };

@@ -7,6 +7,7 @@ import {
   deleteOrder,
   getOrdersByUserId,
   createGuestOrder,
+  getGuestOrderById,
 } from "../controllers/orderController.js";
 
 const router = express.Router();
@@ -16,6 +17,7 @@ router.post("/guest", createGuestOrder);
 
 router.get("/", getOrders);
 router.get("/:id", getOrderById);
+router.get("/guest/:id", getGuestOrderById);
 router.get("/user/orders", getOrdersByUserId);
 
 router.put("/:id", updateOrder);

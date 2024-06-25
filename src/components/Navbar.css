@@ -37,8 +37,11 @@
 /* Flex container for navbar links */
 .navbar-links {
   display: flex;
-  gap: 1rem;
+  flex-grow: 1;
+  justify-content: flex-end; /* Align links to the right */
+  gap: 2rem; /* Increase the gap between links for better spacing */
   transition: all 0.3s ease;
+  padding-right: 1rem; /* Adjust padding to align the links */
 }
 
 /* Individual navbar link styling */

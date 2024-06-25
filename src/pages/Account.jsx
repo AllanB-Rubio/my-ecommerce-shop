@@ -1,16 +1,12 @@
 // src/pages/Account.jsx
 import React, { useState, useEffect, useContext } from "react";
-import { useSearchParams } from "react-router-dom";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import "./Account.css";
 
 const Account = () => {
-  const { user, login, register } = useContext(AuthContext);
-  const [searchParams] = useSearchParams();
-  const [isLogin, setIsLogin] = useState(
-    searchParams.get("isLogin") === "true"
-  );
+  const { user, login, register, logout } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -23,12 +19,18 @@ const Account = () => {
   const [success, setSuccess] = useState("");
   const [orders, setOrders] = useState([]);
   const [logoutSuccess, setLogoutSuccess] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    setIsLogin(params.get("form") === "register" ? false : true);
+
     if (user) {
       fetchOrders();
     }
-  }, [user]);
+  }, [location.search, user]);
 
   const fetchOrders = async () => {
     try {
@@ -57,6 +59,7 @@ const Account = () => {
       setSuccess("Login successful!");
       setError("");
       setLogoutSuccess(""); // Clear logout success message on login
+      navigate("/account");
     } catch (error) {
       setError("Login failed. Please check your credentials.");
       console.error("Login failed", error.response || error);
@@ -70,6 +73,7 @@ const Account = () => {
       setIsLogin(true);
       setSuccess("Account created successfully!");
       setError("");
+      navigate("/account");
     } catch (error) {
       setError("Registration failed. Please try again.");
       console.error("Registration failed", error.response || error);

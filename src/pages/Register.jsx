@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -9,22 +11,22 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
+  const { register } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
-        {
-          username,
-          email,
-          password,
-          firstName,
-          lastName,
-          phoneNumber,
-        }
-      );
-      console.log("User registered:", response.data);
+      await register({
+        username,
+        email,
+        password,
+        firstName,
+        lastName,
+        phoneNumber,
+      });
+      setError("");
+      navigate("/account"); // Redirect after successful registration
     } catch (error) {
       setError("Registration error");
       console.error("Registration error:", error);

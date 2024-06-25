@@ -15,8 +15,10 @@ const CheckoutOptions = () => {
       <h1>Checkout Options</h1>
       <p>Please choose an option to proceed with your checkout:</p>
       <div className="checkout-buttons">
-        <button onClick={() => navigate("/account")}>Login</button>
-        <button onClick={() => navigate("/account")}>Register</button>
+        <button onClick={() => navigate("/account?form=login")}>Login</button>
+        <button onClick={() => navigate("/account?form=register")}>
+          Register
+        </button>
         <button onClick={handleGuestCheckout}>Checkout as Guest</button>
       </div>
     </div>
