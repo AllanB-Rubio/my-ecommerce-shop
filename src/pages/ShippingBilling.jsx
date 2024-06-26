@@ -88,56 +88,68 @@ const ShippingBilling = () => {
   return (
     <form onSubmit={handleSubmit} className="shipping-billing-form">
       <h2>Shipping Address</h2>
-      <input
-        type="text"
-        name="addressLine1"
-        placeholder="Address Line 1"
-        value={shipping.addressLine1}
-        onChange={(e) => handleInputChange(e, setShipping)}
-        required
-      />
-      <input
-        type="text"
-        name="addressLine2"
-        placeholder="Address Line 2"
-        value={shipping.addressLine2}
-        onChange={(e) => handleInputChange(e, setShipping)}
-      />
-      <input
-        type="text"
-        name="city"
-        placeholder="City"
-        value={shipping.city}
-        onChange={(e) => handleInputChange(e, setShipping)}
-        required
-      />
-      <input
-        type="text"
-        name="state"
-        placeholder="State"
-        value={shipping.state}
-        onChange={(e) => handleInputChange(e, setShipping)}
-        required
-      />
-      <input
-        type="text"
-        name="postalCode"
-        placeholder="Postal Code"
-        value={shipping.postalCode}
-        onChange={(e) => handleInputChange(e, setShipping)}
-        required
-      />
-      <input
-        type="text"
-        name="country"
-        placeholder="Country"
-        value={shipping.country}
-        onChange={(e) => handleInputChange(e, setShipping)}
-        required
-      />
+      <div className="form-group">
+        <input
+          type="text"
+          name="addressLine1"
+          placeholder="Address Line 1"
+          value={shipping.addressLine1}
+          onChange={(e) => handleInputChange(e, setShipping)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="text"
+          name="addressLine2"
+          placeholder="Address Line 2"
+          value={shipping.addressLine2}
+          onChange={(e) => handleInputChange(e, setShipping)}
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="text"
+          name="city"
+          placeholder="City"
+          value={shipping.city}
+          onChange={(e) => handleInputChange(e, setShipping)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="text"
+          name="state"
+          placeholder="State"
+          value={shipping.state}
+          onChange={(e) => handleInputChange(e, setShipping)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="text"
+          name="postalCode"
+          placeholder="Postal Code"
+          value={shipping.postalCode}
+          onChange={(e) => handleInputChange(e, setShipping)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="text"
+          name="country"
+          placeholder="Country"
+          value={shipping.country}
+          onChange={(e) => handleInputChange(e, setShipping)}
+          required
+        />
+      </div>
 
       <h2>Billing Address</h2>
-      <label>
+      <label className="checkbox-label">
         <input
           type="checkbox"
           checked={sameAsShipping}
@@ -147,57 +159,71 @@ const ShippingBilling = () => {
       </label>
       {!sameAsShipping && (
         <>
-          <input
-            type="text"
-            name="addressLine1"
-            placeholder="Address Line 1"
-            value={billing.addressLine1}
-            onChange={(e) => handleInputChange(e, setBilling)}
-            required
-          />
-          <input
-            type="text"
-            name="addressLine2"
-            placeholder="Address Line 2"
-            value={billing.addressLine2}
-            onChange={(e) => handleInputChange(e, setBilling)}
-          />
-          <input
-            type="text"
-            name="city"
-            placeholder="City"
-            value={billing.city}
-            onChange={(e) => handleInputChange(e, setBilling)}
-            required
-          />
-          <input
-            type="text"
-            name="state"
-            placeholder="State"
-            value={billing.state}
-            onChange={(e) => handleInputChange(e, setBilling)}
-            required
-          />
-          <input
-            type="text"
-            name="postalCode"
-            placeholder="Postal Code"
-            value={billing.postalCode}
-            onChange={(e) => handleInputChange(e, setBilling)}
-            required
-          />
-          <input
-            type="text"
-            name="country"
-            placeholder="Country"
-            value={billing.country}
-            onChange={(e) => handleInputChange(e, setBilling)}
-            required
-          />
+          <div className="form-group">
+            <input
+              type="text"
+              name="addressLine1"
+              placeholder="Address Line 1"
+              value={billing.addressLine1}
+              onChange={(e) => handleInputChange(e, setBilling)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="addressLine2"
+              placeholder="Address Line 2"
+              value={billing.addressLine2}
+              onChange={(e) => handleInputChange(e, setBilling)}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="city"
+              placeholder="City"
+              value={billing.city}
+              onChange={(e) => handleInputChange(e, setBilling)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="state"
+              placeholder="State"
+              value={billing.state}
+              onChange={(e) => handleInputChange(e, setBilling)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="postalCode"
+              placeholder="Postal Code"
+              value={billing.postalCode}
+              onChange={(e) => handleInputChange(e, setBilling)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="country"
+              placeholder="Country"
+              value={billing.country}
+              onChange={(e) => handleInputChange(e, setBilling)}
+              required
+            />
+          </div>
         </>
       )}
 
-      <button type="submit">Place Order</button>
+      <button type="submit" className="submit-button">
+        Place Order
+      </button>
     </form>
   );
 };

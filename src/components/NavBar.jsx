@@ -33,7 +33,7 @@ const NavBar = () => {
             className="navbar-link"
             onClick={() => setIsOpen(false)}
           >
-            Best Sellers
+            Shop
           </Link>
           <Link
             to="/contact"
