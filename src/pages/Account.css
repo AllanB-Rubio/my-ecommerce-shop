@@ -1,12 +1,16 @@
+/* Account.css */
 .auth-container,
 .account-container {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background: #ffffff00;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
 }
 
 .auth-form,
@@ -21,9 +25,16 @@
   margin-bottom: 1rem;
   padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
   box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff; /* Adjust text color for better contrast */
+}
+
+.auth-form input::placeholder,
+.account-container input::placeholder {
+  color: rgba(255, 255, 255, 0.816); /* Custom placeholder color */
 }
 
 .auth-form button,
@@ -31,16 +42,17 @@
   width: calc(100% - 1rem); /* Adjusting width to align with the input fields */
   padding: 0.75rem;
   font-size: 1rem;
-  background-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.7);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .auth-form button:hover,
 .account-container button:hover {
-  background-color: #0056b3;
+  background-color: rgba(0, 123, 255, 1);
 }
 
 .auth-toggle {

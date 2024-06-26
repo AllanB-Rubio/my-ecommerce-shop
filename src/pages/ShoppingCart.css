@@ -2,24 +2,28 @@
 .cart-container {
   max-width: 1000px;
   margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff00;
+  padding: 2rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
 }
 
 .cart-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1rem;
+  color: #fff; /* Update text color for better contrast */
 }
 
 .cart-table th,
 .cart-table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #ddddddb8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Adjust border color for consistency */
 }
 
 .cart-image {
@@ -30,7 +34,7 @@
 }
 
 .cart-table th {
-  background-color: #f4f4f400;
+  background-color: rgba(255, 255, 255, 0.2); /* Adjust background color */
 }
 
 .cart-table td {
@@ -42,6 +46,9 @@
   padding: 0.25rem;
   font-size: 1rem;
   text-align: center;
+  background: rgba(255, 255, 255, 0.2); /* Add background color */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Adjust border color */
+  color: #fff; /* Update text color for better contrast */
 }
 
 .cart-summary {
@@ -50,7 +57,8 @@
   align-items: center;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #ddddddb8;
+  border-top: 1px solid rgba(255, 255, 255, 0.3); /* Adjust border color */
+  color: #fff; /* Update text color for better contrast */
 }
 
 .total-amount {
@@ -61,16 +69,17 @@
 .checkout-button {
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
-  background-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.7);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   display: block;
+  transition: background-color 0.3s ease;
 }
 
 .checkout-button:hover {
-  background-color: #0056b3;
+  background-color: rgba(0, 123, 255, 1);
 }
 
 button {
@@ -81,6 +90,7 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
