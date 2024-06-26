@@ -1,34 +1,40 @@
+/* src/pages/ThankYou.css */
 .thank-you-container {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background: #ffffff00;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   text-align: center;
 }
 
 .thank-you-container h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #fff;
 }
 
 .thank-you-container p {
   font-size: 1rem;
   margin-bottom: 2rem;
+  color: #fff;
 }
 
 .thank-you-home-link {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  background-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.7);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .thank-you-home-link:hover {
-  background-color: #0056b3;
+  background-color: rgba(0, 123, 255, 1);
 }
