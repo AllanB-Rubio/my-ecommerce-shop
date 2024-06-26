@@ -150,6 +150,9 @@ const createTables = async () => {
   const category3 = await client.query(
     `INSERT INTO product_categories (name, description) VALUES ('Formal Wear', 'Various types of formal wear') RETURNING id;`
   );
+  const category4 = await client.query(
+    `INSERT INTO product_categories (name, description) VALUES ('Accessories', 'Various accessories') RETURNING id;`
+  );
 
   const inventory1 = await client.query(
     `INSERT INTO product_inventories (quantity) VALUES (100) RETURNING id;`
@@ -160,20 +163,29 @@ const createTables = async () => {
   const inventory3 = await client.query(
     `INSERT INTO product_inventories (quantity) VALUES (150) RETURNING id;`
   );
+  const inventory4 = await client.query(
+    `INSERT INTO product_inventories (quantity) VALUES (50) RETURNING id;`
+  );
 
   // Insert products
   const insertProducts = `
     INSERT INTO products (name, description, SKU, price, inventory_id, category_id, image)
     VALUES
       ('Stylish Shirt', 'A very stylish shirt.', 'SHIRT001', 19.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/white-shirt-gradient.png'),
-      ('Casual T-Shirt', 'A very casual t-shirt.', 'TSHIRT001', 19.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/dual.display-shirts.png'),
-      ('Comfy Sweater', 'A very compfy sweater.', 'F_SHIRT001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/sweatshirt-mockup.png'),
-      ('Dual Tone Hoodie', 'Zip-Up soft hoodie.', 'BSS001', 34.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/black-white-hoodie.png'),
-      ('Top Rated T-Shirt', 'A top-rated t-shirt.', 'TRT001', 24.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/shirt-woman.png'),
-      ('Famous Formal Shirt', 'Grayscale Edition Shirt.', 'FFS001', 44.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/white-tshirt.png'),
-      ('New Arrival Shirt', 'A stylish new arrival shirt.', 'NAS001', 29.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/new-arrival.jpg'),
-      ('Latest T-Shirt', 'The latest in fashion t-shirts.', 'LT001', 19.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/new-arrival.jpg'),
-      ('Brand New Formal Shirt', 'A brand new formal shirt.', 'BNFS001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/new-arrival.jpg');
+      ('Relentless 2-Pack Black and White', '2-Pack Special Black and White edition shirts.', 'TSHIRT001', 19.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/dual.display-shirts.png'),
+      ('Relentless White Sweater', 'A very compfy sweater.', 'F_SHIRT001', 39.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/sweatshirt-mockup.png'),
+
+      ('Relentless Dual Tone Hoodie', 'Our best seller and most popular hoodie.', 'BSS001', 34.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/dual-tone-hoodie.jpeg'),
+      ('Womans Gradient T-Shirt', 'A loose fit dual tone t-shirt.', 'TRT001', 24.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/shirt-woman.png'),
+      ('Grayscale Edition Shirt', 'Grayscale Edition Shirt.', 'FFS001', 24.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/white-tshirt.png'),
+
+      ('Relentless Jacket', 'A stylish black jacket.', 'RJB001', 39.99, ${inventory1.rows[0].id}, ${category1.rows[0].id}, '/images/closeup-jacket-mockup.jpg'),
+      ('Relentless Sweater Expanded', 'Relentless Sweater with expanded logo in the back.', 'LT001', 39.99, ${inventory2.rows[0].id}, ${category2.rows[0].id}, '/images/jacket-mockup-mannequin.jpg'),
+      ('Relentless Beanie V1.0', 'Warm and cozy black beanie.', 'BNFS001', 24.99, ${inventory3.rows[0].id}, ${category3.rows[0].id}, '/images/black.beanie.jpg'),
+
+      ('Relentless Mug', 'A stylish mug.', 'MUG001', 12.99, ${inventory4.rows[0].id}, ${category4.rows[0].id}, '/images/white.black.mugs.png'),
+      ('Relentless Keychain', 'A leather keychain.', 'KEYCHAIN001', 9.99, ${inventory4.rows[0].id}, ${category4.rows[0].id}, '/images/pins.mockup.png'),
+      ('Relentless Water Bottle', 'A sleek water bottle.', 'BOTTLE001', 19.99, ${inventory4.rows[0].id}, ${category4.rows[0].id}, '/images/water-bottle.png')
   `;
   await client.query(insertProducts);
 };

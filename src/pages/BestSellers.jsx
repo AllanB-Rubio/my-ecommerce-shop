@@ -5,38 +5,38 @@ import "./BestSellers.css";
 const bestSellers = [
   {
     id: "1",
-    name: "Popular Shirt",
+    name: "Relentless Dual Color Gradient Edition Shirt",
     price: 29.99,
-    description: "A very popular shirt.",
-    image: "/images/white-shirt-gradient.png", // Updated image path
+    description: "A very stylish soft shirt.",
+    image: "/images/white-shirt-gradient.png",
   },
   {
     id: "2",
     name: "Trendy T-Shirt",
     price: 19.99,
     description: "A trendy t-shirt.",
-    image: "/images/dual.display-shirts.png", // Updated image path
+    image: "/images/dual.display-shirts.png",
   },
   {
     id: "3",
     name: "Classic Formal Shirt",
     price: 39.99,
     description: "A classic formal shirt.",
-    image: "/images/sweatshirt-mockup.png", // Updated image path
+    image: "/images/sweatshirt-mockup.png",
   },
   {
     id: "4",
     name: "Summer T-Shirt",
     price: 24.99,
     description: "Perfect for the summer.",
-    image: "/images/black-white-hoodie.png", // Updated image path
+    image: "/images/black-white-hoodie.png",
   },
   {
     id: "5",
     name: "Elegant Shirt",
     price: 34.99,
     description: "An elegant shirt.",
-    image: "/images/shirt-woman.png", // Updated image path
+    image: "/images/shirt-woman.png",
   },
   {
     id: "6",

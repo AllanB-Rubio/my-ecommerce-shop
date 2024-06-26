@@ -1,3 +1,4 @@
+// backend/routes/orderRoutes.js
 import express from "express";
 import {
   createOrder,
@@ -9,18 +10,19 @@ import {
   createGuestOrder,
   getGuestOrderById,
 } from "../controllers/orderController.js";
+import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", createOrder);
+router.post("/", authenticateToken, createOrder);
 router.post("/guest", createGuestOrder);
 
-router.get("/", getOrders);
-router.get("/:id", getOrderById);
+router.get("/", authenticateToken, getOrders);
+router.get("/:id", authenticateToken, getOrderById);
 router.get("/guest/:id", getGuestOrderById);
-router.get("/user/orders", getOrdersByUserId);
+router.get("/user/orders", authenticateToken, getOrdersByUserId);
 
-router.put("/:id", updateOrder);
-router.delete("/:id", deleteOrder);
+router.put("/:id", authenticateToken, updateOrder);
+router.delete("/:id", authenticateToken, deleteOrder);
 
 export default router;
