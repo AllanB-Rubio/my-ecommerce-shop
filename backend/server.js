@@ -20,6 +20,11 @@ app.use(
     credentials: true,
   })
 );
+
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"))
+);
+
 app.use(morgan("dev"));
 app.use(express.json());
 
