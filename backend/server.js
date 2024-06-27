@@ -12,8 +12,6 @@ import addressRoutes from "./routes/addressRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import { createTables, client } from "./db.js";
 import { authenticateToken } from "./middleware/authMiddleware.js";
-import path from "path";
-import { fileURLToPath } from "url";
 
 const app = express();
 app.use(
@@ -23,9 +21,7 @@ app.use(
   })
 );
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+import path from "path";
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "../client/dist/index.html"))
 );
