@@ -40,12 +40,7 @@ app.use("/api/reviews", authenticateToken, reviewRoutes);
 app.use("/api/addresses", authenticateToken, addressRoutes);
 app.use("/api/payments", authenticateToken, paymentRoutes);
 
-// Serve static files
-app.use(
-  "/assets",
-  express.static(path.join(__dirname, "../client/dist/assets"))
-);
-
+// Serve the index.html file for any other requests
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
