@@ -30,7 +30,7 @@ app.use(
 app.use(express.json());
 app.use(morgan("dev"));
 
-const buildPath = path.join(__dirname, "../public/images");
+const buildPath = path.join(__dirname, "../public");
 app.use(express.static(buildPath));
 
 app.get("/", (req, res) => {
