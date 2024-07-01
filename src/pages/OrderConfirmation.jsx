@@ -15,6 +15,10 @@ const OrderConfirmation = () => {
 
   useEffect(() => {
     const fetchOrder = async () => {
+      if (!orderId) {
+        setError("Order ID is undefined");
+        return;
+      }
       try {
         let response;
         if (user) {
