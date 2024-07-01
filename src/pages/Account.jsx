@@ -35,7 +35,7 @@ const Account = () => {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/orders/user/orders",
+        `${import.meta.env.VITE_API_URL}/orders/user/orders`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
