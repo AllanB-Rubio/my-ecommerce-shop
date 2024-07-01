@@ -10,8 +10,6 @@ const Checkout = () => {
   const [cart, setCart] = useState([]);
   const [isGuest, setIsGuest] = useState(false);
 
-  const apiURL = import.meta.env.VITE_API_URL;
-
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
@@ -20,6 +18,8 @@ const Checkout = () => {
       setIsGuest(true);
     }
   }, [location.search]);
+
+  const apiURL = import.meta.env.VITE_API_URL;
 
   const handleOrder = async () => {
     try {
@@ -31,27 +31,24 @@ const Checkout = () => {
         ),
       };
 
-      let response;
       if (isGuest) {
-        response = await axios.post(`${apiURL}/api/orders/guest`, orderData);
+        const response = await axios.post(
+          `${apiURL}/api/orders/guest`,
+          orderData
+        );
+        navigate(`/order-confirmation/${response.data.id}`);
       } else {
         const token = localStorage.getItem("token");
         const userId = JSON.parse(atob(token.split(".")[1])).id; // Decode JWT to get userId
         orderData.userId = userId;
-        response = await axios.post(`${apiURL}/api/orders`, orderData, {
+        const response = await axios.post(`${apiURL}/api/orders`, orderData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+        navigate(`/order-confirmation/${response.data.id}`);
       }
 
-      const { id: orderId } = response.data;
-
-      if (!orderId) {
-        throw new Error("Order ID is undefined after placing the order");
-      }
-
-      navigate(`/order-confirmation/${orderId}`);
       // Clear cart after order is placed
       setCart([]);
       localStorage.removeItem("cart");
