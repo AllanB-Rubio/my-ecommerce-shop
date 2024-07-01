@@ -12,7 +12,7 @@ export const createOrder = async (req, res) => {
     const orderQuery = `
       INSERT INTO orders (id, user_id, total_amount, status)
       VALUES ($1, $2, $3, $4)
-      RETURNING *;
+      RETURNING id;
     `;
     const orderValues = [orderId, userId, totalAmount, orderStatus];
     const orderResult = await client.query(orderQuery, orderValues);
@@ -33,7 +33,7 @@ export const createOrder = async (req, res) => {
       await client.query(orderItemsQuery, orderItemValues);
     }
 
-    res.status(201).json({ id: orderId });
+    res.status(201).json({ id: orderResult.rows[0].id });
   } catch (error) {
     console.error("Failed to create order:", error);
     res.status(500).json({ error: "Failed to create order" });
@@ -50,7 +50,7 @@ export const createGuestOrder = async (req, res) => {
     const orderQuery = `
       INSERT INTO orders (id, total_amount, status, is_guest)
       VALUES ($1, $2, $3, $4)
-      RETURNING *;
+      RETURNING id;
     `;
     const orderValues = [orderId, totalAmount, orderStatus, true];
     const orderResult = await client.query(orderQuery, orderValues);
@@ -105,7 +105,7 @@ export const createGuestOrder = async (req, res) => {
       );
     }
 
-    res.status(201).json({ id: orderId });
+    res.status(201).json({ id: orderResult.rows[0].id });
   } catch (error) {
     console.error("Failed to create guest order:", error);
     res.status(500).json({ error: "Failed to create guest order" });
