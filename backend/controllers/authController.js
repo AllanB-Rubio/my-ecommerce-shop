@@ -2,7 +2,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
-import { client, getUserById } from "../db.js"; // Ensure getUserById is correctly imported from db.js
+import { client } from "../db.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -45,6 +45,7 @@ export const registerUser = async (req, res) => {
 // Login User
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  console.log("Logging in user:", { email, password });
 
   const SQL = `SELECT * FROM "user" WHERE email = $1;`;
   try {

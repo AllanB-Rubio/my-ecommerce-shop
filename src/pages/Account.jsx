@@ -1,4 +1,3 @@
-// src/pages/Account.jsx
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -23,25 +22,28 @@ const Account = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
 
+  const apiURL =
+    import.meta.env.MODE === "production"
+      ? import.meta.env.VITE_API_URL_PRODUCTION
+      : import.meta.env.VITE_API_URL_LOCAL;
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     setIsLogin(params.get("form") === "register" ? false : true);
 
     if (user) {
       fetchOrders();
+      navigate("/account");
     }
   }, [location.search, user]);
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/orders/user/orders`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await axios.get(`${apiURL}/api/orders/user/orders`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setOrders(response.data);
     } catch (error) {
       console.error("Failed to fetch orders", error);

@@ -4,19 +4,24 @@ import react from "@vitejs/plugin-react";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
-  console.log("VITE_API_URL:", env.VITE_API_URL); // Debug log to check the value
+  const apiUrl =
+    mode === "production"
+      ? env.VITE_API_URL_PRODUCTION
+      : env.VITE_API_URL_LOCAL;
+
+  console.log("API URL:", apiUrl);
 
   return {
     plugins: [react()],
     define: {
       "process.env": {
-        VITE_API_URL: env.VITE_API_URL,
+        VITE_API_URL: apiUrl,
       },
     },
     server: {
       proxy: {
         "/api": {
-          target: env.VITE_API_URL,
+          target: apiUrl,
           changeOrigin: true,
           secure: false,
         },
