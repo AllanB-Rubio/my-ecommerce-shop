@@ -10,6 +10,8 @@ const Checkout = () => {
   const [cart, setCart] = useState([]);
   const [isGuest, setIsGuest] = useState(false);
 
+  const apiURL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
@@ -31,7 +33,7 @@ const Checkout = () => {
 
       if (isGuest) {
         const response = await axios.post(
-          "http://localhost:3000/api/orders/guest",
+          `${apiURL}/api/orders/guest`,
           orderData
         );
         navigate(`/order-confirmation/${response.data.id}`);
@@ -39,15 +41,11 @@ const Checkout = () => {
         const token = localStorage.getItem("token");
         const userId = JSON.parse(atob(token.split(".")[1])).id; // Decode JWT to get userId
         orderData.userId = userId;
-        const response = await axios.post(
-          "http://localhost:3000/api/orders",
-          orderData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.post(`${apiURL}/api/orders`, orderData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         navigate(`/order-confirmation/${response.data.id}`);
       }
 
