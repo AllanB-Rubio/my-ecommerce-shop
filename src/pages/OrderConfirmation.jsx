@@ -11,24 +11,21 @@ const OrderConfirmation = () => {
   const [order, setOrder] = useState(null);
   const [error, setError] = useState("");
 
+  const apiURL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchOrder = async () => {
       try {
         let response;
         if (user) {
           const token = localStorage.getItem("token");
-          response = await axios.get(
-            `http://localhost:3000/api/orders/${orderId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          response = await axios.get(`${apiURL}/api/orders/${orderId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
         } else {
-          response = await axios.get(
-            `http://localhost:3000/api/orders/guest/${orderId}`
-          );
+          response = await axios.get(`${apiURL}/api/orders/guest/${orderId}`);
         }
         setOrder(response.data);
       } catch (error) {
@@ -38,7 +35,7 @@ const OrderConfirmation = () => {
     };
 
     fetchOrder();
-  }, [orderId, user]);
+  }, [orderId, user, apiURL]);
 
   if (!order) {
     return <div>Loading...</div>;
