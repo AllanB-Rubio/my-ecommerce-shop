@@ -16,8 +16,6 @@ import OrderConfirmation from "./pages/OrderConfirmation";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 import Footer from "./components/Footer";
-import AdminLogin from "./pages/AdminLogin";
-import AdminDashboard from "./pages/AdminDashboard";
 
 import "./index.css";
 
@@ -43,8 +41,6 @@ function App() {
             path="order-confirmation/:orderId"
             element={<OrderConfirmation />}
           />
-          <Route path="admin/login" element={<AdminLogin />} />
-          <Route path="admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </main>
       <Footer />

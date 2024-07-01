@@ -4,16 +4,13 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
-        "source": "**",
-        "function": "api"
+        "source": "/api/**",
+        "destination": "https://my-ecommerce-shop-backend.onrender.com/api/**"
       },
       {
-        "source": "!/api/**",
+        "source": "**",
         "destination": "/index.html"
       }
     ]
-  },
-  "functions": {
-    "source": "functions"
   }
 }

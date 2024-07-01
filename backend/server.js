@@ -3,11 +3,13 @@ import cors from "cors";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
-import adminRoutes from "./routes/adminRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
@@ -22,7 +24,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: [
+      process.env.CLIENT_URL || "http://localhost:5173",
+      "https://relentless-pursuit-e19b1.web.app",
+    ],
     credentials: true,
   })
 );
@@ -40,7 +45,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
-app.use("/api/admin/users", authenticateToken, adminRoutes);
 app.use("/api/users", authenticateToken, userRoutes);
 app.use("/api/orders", orderRoutes); // Note: No authentication for guest checkout
 app.use("/api/reviews", authenticateToken, reviewRoutes);

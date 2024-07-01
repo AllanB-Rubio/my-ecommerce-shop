@@ -1,14 +1,16 @@
 import pkg from "pg";
-import { v4 as uuidv4 } from "uuid";
 import dotenv from "dotenv";
+import { v4 as uuidv4 } from "uuid";
 
 dotenv.config();
+
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+console.log("PORT:", process.env.PORT);
 
 const { Client } = pkg;
 
 const client = new Client({
-  connectionString:
-    process.env.DATABASE_URL || "postgres://localhost/e_commerce_project",
+  connectionString: process.env.DATABASE_URL,
 });
 
 const createTables = async () => {
@@ -223,3 +225,5 @@ const getUserById = async (id) => {
 };
 
 export { createTables, createUser, getUserByEmail, getUserById, client };
+
+export default client;
