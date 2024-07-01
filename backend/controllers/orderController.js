@@ -33,7 +33,7 @@ export const createOrder = async (req, res) => {
       await client.query(orderItemsQuery, orderItemValues);
     }
 
-    res.status(201).json(orderResult.rows[0]);
+    res.status(201).json({ id: orderId });
   } catch (error) {
     console.error("Failed to create order:", error);
     res.status(500).json({ error: "Failed to create order" });
@@ -105,7 +105,7 @@ export const createGuestOrder = async (req, res) => {
       );
     }
 
-    res.status(201).json(orderResult.rows[0]);
+    res.status(201).json({ id: orderId });
   } catch (error) {
     console.error("Failed to create guest order:", error);
     res.status(500).json({ error: "Failed to create guest order" });

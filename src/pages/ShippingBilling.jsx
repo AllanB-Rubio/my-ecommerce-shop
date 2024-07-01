@@ -59,20 +59,22 @@ const ShippingBilling = () => {
         billing: sameAsShipping ? shipping : billing,
       };
 
+      let response;
       if (isGuest) {
-        const response = await axios.post(
-          `${apiURL}/api/orders/guest`,
-          orderData
-        );
-        navigate(`/order-confirmation/${response.data.id}`);
+        response = await axios.post(`${apiURL}/api/orders/guest`, orderData);
       } else {
         const token = localStorage.getItem("token");
-        const response = await axios.post(`${apiURL}/api/orders`, orderData, {
+        response = await axios.post(`${apiURL}/api/orders`, orderData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        navigate(`/order-confirmation/${response.data.id}`);
+      }
+      const orderId = response.data.id;
+      if (orderId) {
+        navigate(`/order-confirmation/${orderId}`);
+      } else {
+        throw new Error("Order ID is missing in the response");
       }
 
       localStorage.removeItem("cart");
