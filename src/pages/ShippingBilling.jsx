@@ -1,4 +1,3 @@
-// src/pages/ShippingBilling.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -25,6 +24,8 @@ const ShippingBilling = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isGuest, setIsGuest] = useState(false);
+
+  const apiURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -59,27 +60,22 @@ const ShippingBilling = () => {
       };
 
       if (isGuest) {
-        // Remove any headers for guest checkout
         const response = await axios.post(
-          "http://localhost:3000/api/orders/guest",
+          `${apiURL}/api/orders/guest`,
           orderData
         );
         navigate(`/order-confirmation/${response.data.id}`);
       } else {
         const token = localStorage.getItem("token");
-        const response = await axios.post(
-          "http://localhost:3000/api/orders",
-          orderData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.post(`${apiURL}/api/orders`, orderData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         navigate(`/order-confirmation/${response.data.id}`);
       }
 
-      localStorage.removeItem("cart"); // Clear the cart after placing the order
+      localStorage.removeItem("cart");
     } catch (error) {
       console.error("Failed to save addresses or create order", error);
     }
