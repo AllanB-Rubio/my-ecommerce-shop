@@ -72,11 +72,13 @@ export const getUserProfile = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    const user = await getUserById(userId);
-    if (!user) {
+    const user = await client.query('SELECT * FROM "user" WHERE id = $1', [
+      userId,
+    ]);
+    if (user.rows.length === 0) {
       return res.status(404).json({ error: "User not found" });
     }
-    res.status(200).json(user);
+    res.status(200).json(user.rows[0]);
   } catch (error) {
     console.error("Failed to fetch user profile:", error);
     res.status(500).json({ error: "Failed to fetch user profile" });

@@ -60,9 +60,9 @@ const PORT = process.env.PORT || 3000;
 
 client
   .connect()
-  .then(() => {
-    return createTables();
-  })
+  // .then(() => {
+  //   // return createTables();
+  // })
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);

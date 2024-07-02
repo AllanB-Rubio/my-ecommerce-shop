@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 export const AuthContext = createContext();
@@ -57,6 +57,23 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     setUser(null);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get(`${apiURL}/api/auth/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          setUser(response.data);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch user profile:", error);
+          localStorage.removeItem("token");
+        });
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}>

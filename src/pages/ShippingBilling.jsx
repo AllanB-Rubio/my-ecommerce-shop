@@ -1,3 +1,4 @@
+// src/pages/ShippingBilling.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -25,7 +26,7 @@ const ShippingBilling = () => {
   const location = useLocation();
   const [isGuest, setIsGuest] = useState(false);
 
-  const apiURL = import.meta.env.VITE_API_URL;
+  const apiURL = process.env.VITE_API_URL;
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);

@@ -1,4 +1,3 @@
-// src/pages/OrderConfirmation.jsx
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -11,7 +10,7 @@ const OrderConfirmation = () => {
   const [order, setOrder] = useState(null);
   const [error, setError] = useState("");
 
-  const apiURL = import.meta.env.VITE_API_URL;
+  const apiURL = process.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -54,20 +53,21 @@ const OrderConfirmation = () => {
       <p>Status: {order.status}</p>
       <h2>Items</h2>
       <ul>
-        {order.items.map((item) => (
-          <li key={item.id} className="order-item">
-            <img
-              src={item.image}
-              alt={item.name}
-              className="order-item-image"
-            />
-            <div className="order-item-details">
-              <strong>{item.name}</strong>
-              <span>Quantity: {item.quantity}</span>
-              <span>Price: ${item.price}</span>
-            </div>
-          </li>
-        ))}
+        {order.items &&
+          order.items.map((item) => (
+            <li key={item.id} className="order-item">
+              <img
+                src={item.image}
+                alt={item.name}
+                className="order-item-image"
+              />
+              <div className="order-item-details">
+                <strong>{item.name}</strong>
+                <span>Quantity: {item.quantity}</span>
+                <span>Price: ${item.price}</span>
+              </div>
+            </li>
+          ))}
       </ul>
     </div>
   );

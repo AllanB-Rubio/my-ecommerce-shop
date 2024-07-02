@@ -19,7 +19,7 @@ export const createOrder = async (req, res) => {
 
     const orderItemsQuery = `
       INSERT INTO orderItems (id, order_id, product_id, quantity, price)
-      VALUES ($1, $2, $3, $4, $5)
+      VALUES ($1, $2, $3, $4, $5);
     `;
     for (const item of items) {
       const orderItemId = uuidv4();
@@ -35,7 +35,7 @@ export const createOrder = async (req, res) => {
 
     res.status(201).json({ id: orderResult.rows[0].id });
   } catch (error) {
-    console.error("Failed to create order:", error);
+    console.error("Failed to create order:", error.message, error.stack);
     res.status(500).json({ error: "Failed to create order" });
   }
 };
@@ -57,7 +57,7 @@ export const createGuestOrder = async (req, res) => {
 
     const orderItemsQuery = `
       INSERT INTO orderItems (id, order_id, product_id, quantity, price)
-      VALUES ($1, $2, $3, $4, $5)
+      VALUES ($1, $2, $3, $4, $5);
     `;
     for (const item of items) {
       const orderItemId = uuidv4();
@@ -74,7 +74,7 @@ export const createGuestOrder = async (req, res) => {
     const shippingId = uuidv4();
     await client.query(
       `INSERT INTO addresses (id, order_id, type, address_line1, address_line2, city, state, postal_code, country)
-       VALUES ($1, $2, 'shipping', $3, $4, $5, $6, $7, $8)`,
+       VALUES ($1, $2, 'shipping', $3, $4, $5, $6, $7, $8);`,
       [
         shippingId,
         orderId,
@@ -91,7 +91,7 @@ export const createGuestOrder = async (req, res) => {
       const billingId = uuidv4();
       await client.query(
         `INSERT INTO addresses (id, order_id, type, address_line1, address_line2, city, state, postal_code, country)
-         VALUES ($1, $2, 'billing', $3, $4, $5, $6, $7, $8)`,
+         VALUES ($1, $2, 'billing', $3, $4, $5, $6, $7, $8);`,
         [
           billingId,
           orderId,
@@ -107,7 +107,7 @@ export const createGuestOrder = async (req, res) => {
 
     res.status(201).json({ id: orderResult.rows[0].id });
   } catch (error) {
-    console.error("Failed to create guest order:", error);
+    console.error("Failed to create guest order:", error.message, error.stack);
     res.status(500).json({ error: "Failed to create guest order" });
   }
 };
