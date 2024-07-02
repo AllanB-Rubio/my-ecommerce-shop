@@ -10,22 +10,21 @@
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   text-align: center;
-  overflow-x: auto; 
-
+  overflow-x: auto;
 }
 
 .cart-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1rem;
-  color: #fff; 
+  color: #fff;
 }
 
 .cart-table th,
 .cart-table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .cart-image {
@@ -36,7 +35,7 @@
 }
 
 .cart-table th {
-  background-color: rgba(255, 255, 255, 0.2); 
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .cart-table td {
@@ -48,9 +47,9 @@
   padding: 0.25rem;
   font-size: 1rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.2); 
-  border: 1px solid rgba(255, 255, 255, 0.3); 
-  color: #fff; 
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
 }
 
 .cart-summary {
@@ -59,8 +58,8 @@
   align-items: center;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.3); 
-  color: #fff; /
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff; /* Update text color for better contrast */
 }
 
 .total-amount {
@@ -103,29 +102,31 @@ button:hover {
 @media (max-width: 600px) {
   .cart-container {
     padding: 1rem;
-    margin: 1rem; 
+    margin: 1rem; /* Adjust margin for better fit */
   }
 
   .cart-table {
-    font-size: 0.9rem; 
+    font-size: 0.9rem; /* Adjust font size for better fit */
   }
 
-  .cart-table th, .cart-table td {
-    padding: 0.5rem; 
+  .cart-table th,
+  .cart-table td {
+    padding: 0.5rem; /* Adjust padding for better fit */
   }
 
   .cart-summary {
-    flex-direction: column; 
-    align-items: flex-start; 
+    flex-direction: column; /* Stack total and button vertically */
+    align-items: flex-start; /* Align items to the start */
   }
 
-  .total-amount, .checkout-button {
-    width: 100%; 
-    text-align: center; 
-    margin-top: 0.5rem; 
+  .total-amount,
+  .checkout-button {
+    width: 100%; /* Make total and button full width */
+    text-align: center; /* Center-align text */
+    margin-top: 0.5rem; /* Add margin for spacing */
   }
 
   .checkout-button {
-    font-size: 1rem; 
+    font-size: 1rem; /* Adjust font size */
   }
 }
