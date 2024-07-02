@@ -106,7 +106,6 @@ button:hover {
   .cart-table th,
   .cart-table td {
     padding: 0.5rem;
-    font-size: 0.9rem;
   }
 
   .cart-summary {
@@ -116,25 +115,10 @@ button:hover {
 
   .total-amount {
     margin-bottom: 1rem;
-    font-size: 1.2rem;
   }
 
   .checkout-button {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .cart-table {
-    font-size: 0.9rem;
-  }
-
-  .cart-table input {
-    width: 40px;
-    padding: 0.2rem;
-    font-size: 0.8rem;
-  }
-
-  .cart-image {
-    width: 40px;
+    width: 100%;
+    padding: 1rem;
   }
 }

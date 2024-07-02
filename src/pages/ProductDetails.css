@@ -113,13 +113,16 @@
     font-size: 1.5rem;
   }
 
+  .product-details-info p {
+    font-size: 0.875rem;
+  }
+
   .product-details-price {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .product-details-info button {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
   }
 
   .message {
@@ -131,7 +134,7 @@
   }
 
   .message button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
   }
 }
