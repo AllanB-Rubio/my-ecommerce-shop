@@ -109,32 +109,32 @@
 
 /* media queries for mobile devices */
 @media (max-width: 600px) {
+  .product-details-container {
+    padding: 1rem;
+  }
+
+  .product-details-image {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .product-details-info {
+    max-width: 100%;
+  }
+
   .product-details-info h1 {
     font-size: 1.5rem;
   }
 
   .product-details-info p {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
   }
 
   .product-details-price {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .product-details-info button {
-    font-size: 0.875rem;
-  }
-
-  .message {
-    padding: 0.5rem;
-  }
-
-  .message p {
-    font-size: 1rem;
-  }
-
-  .message button {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
   }
 }

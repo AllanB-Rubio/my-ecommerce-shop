@@ -10,20 +10,22 @@
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   text-align: center;
+  overflow-x: auto; 
+
 }
 
 .cart-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1rem;
-  color: #fff; /* Update text color for better contrast */
+  color: #fff; 
 }
 
 .cart-table th,
 .cart-table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Adjust border color for consistency */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
 }
 
 .cart-image {
@@ -34,7 +36,7 @@
 }
 
 .cart-table th {
-  background-color: rgba(255, 255, 255, 0.2); /* Adjust background color */
+  background-color: rgba(255, 255, 255, 0.2); 
 }
 
 .cart-table td {
@@ -46,9 +48,9 @@
   padding: 0.25rem;
   font-size: 1rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.2); /* Add background color */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Adjust border color */
-  color: #fff; /* Update text color for better contrast */
+  background: rgba(255, 255, 255, 0.2); 
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+  color: #fff; 
 }
 
 .cart-summary {
@@ -57,8 +59,8 @@
   align-items: center;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.3); /* Adjust border color */
-  color: #fff; /* Update text color for better contrast */
+  border-top: 1px solid rgba(255, 255, 255, 0.3); 
+  color: #fff; /
 }
 
 .total-amount {
@@ -101,24 +103,29 @@ button:hover {
 @media (max-width: 600px) {
   .cart-container {
     padding: 1rem;
+    margin: 1rem; 
   }
 
-  .cart-table th,
-  .cart-table td {
-    padding: 0.5rem;
+  .cart-table {
+    font-size: 0.9rem; 
+  }
+
+  .cart-table th, .cart-table td {
+    padding: 0.5rem; 
   }
 
   .cart-summary {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; 
+    align-items: flex-start; 
   }
 
-  .total-amount {
-    margin-bottom: 1rem;
+  .total-amount, .checkout-button {
+    width: 100%; 
+    text-align: center; 
+    margin-top: 0.5rem; 
   }
 
   .checkout-button {
-    width: 100%;
-    padding: 1rem;
+    font-size: 1rem; 
   }
 }
