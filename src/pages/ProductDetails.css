@@ -106,3 +106,22 @@
 .message button:last-child:hover {
   background-color: #218838;
 }
+
+/* media queries for mobile devices */
+@media (max-width: 600px) {
+  .message {
+    padding: 0.5rem;
+    width: 90%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .message p {
+    font-size: 1rem;
+  }
+
+  .message button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
