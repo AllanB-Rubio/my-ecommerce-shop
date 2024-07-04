@@ -27,3 +27,7 @@ Relentless Pursuit is an e-commerce web application designed to offer a seamless
 - PostgreSQL installed and running
 - Firebase account for frontend deployment
 - Render account for backend deployment
+
+### Visual Schema link
+
+https://app.eraser.io/workspace/21WsUCtHgiipkv00qWsB?origin=share
