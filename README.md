@@ -31,3 +31,7 @@ Relentless Pursuit is an e-commerce web application designed to offer a seamless
 ### Visual Schema link
 
 https://app.eraser.io/workspace/21WsUCtHgiipkv00qWsB?origin=share
+
+### Wireframe Database Design Link
+
+https://www.figma.com/design/dCQ50tclbI7XTpQcgUOcUI/Untitled?t=5G2TWsl4iq0TGult-0
