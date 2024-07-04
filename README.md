@@ -1,21 +1,29 @@
-# E-Commerce Project
+# Relentless Pursuit E-Commerce Application
 
 ## Overview
 
-This is an e-commerce project built with React, Node.js, Express, and PostgreSQL. The project includes features for user authentication, product management, shopping cart functionality, and an admin dashboard for managing products and orders.
+Relentless Pursuit is an e-commerce web application designed to offer a seamless shopping experience for active lifestyle and athletic products. This application features user registration, product listing, shopping cart, checkout, and order confirmation functionalities.
 
 ## Features
 
-- User registration and login
-- Product listing and details view
-- Shopping cart functionality
-- Order checkout
-- Admin dashboard for managing products and orders
+- User Registration and Login
+- Product Listing and Details
+- Shopping Cart Management
+- Checkout Process (Guest and Registered Users)
+- Order Confirmation and Details
+- Responsive Design for Mobile and Desktop
 
-## Tech Stack
+## Technologies Used
 
-- Frontend: React, React Router
-- Backend: Node.js, Express
-- Database: PostgreSQL
-- Authentication: JSON Web Token (JWT)
-- Styling: CSS
+- **Frontend:** React, Vite, CSS
+- **Backend:** Node.js, Express
+- **Database:** PostgreSQL
+- **Authentication:** JWT
+- **Deployment:** Render (Backend), Firebase (Frontend)
+
+### Tech Stack
+
+- Node.js and npm installed
+- PostgreSQL installed and running
+- Firebase account for frontend deployment
+- Render account for backend deployment
